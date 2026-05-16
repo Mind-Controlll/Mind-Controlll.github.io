@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>网站配置 / Mind-Controlll</title>
+  <meta name="description" content="说明这个博客的目录结构、全局配置和页面生成规则。">
+  <link rel="canonical" href="https://mind-controlll.github.io/Docs/site-config/">
+  <meta property="og:title" content="网站配置">
+  <meta property="og:description" content="说明这个博客的目录结构、全局配置和页面生成规则。">
+  <meta property="og:image" content="https://mind-controlll.github.io/assets/images/johnny.PNG">
+  <link rel="alternate" type="application/rss+xml" title="Mind-Controlll" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/carbon.css?v=content-model-20260516">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <p class="site-greeting">你好 Ciallo～(∠・ω&lt; )⌒☆</p>
+      <p class="site-description">欢迎来到 Mind-Controlll 的学习记录。</p>
+      <nav class="site-links" aria-label="主导航">
+        <a href="/">Home</a>
+        <a href="/Docs/">Docs</a>
+        <a href="/Blog/">Blog</a>
+        <a href="/CV/">CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <article class="post-content">
+<h1>网站配置</h1>
+<p>参考 Tufted Blog Template 的组织方式，这个博客把配置、内容、资源和构建脚本分开管理。</p>
+<h2>项目结构</h2>
+<ul>
+<li><code>site.config.json</code>：全局配置文件，管理网站标题、作者、导航、页脚和站点地址。</li>
+<li><code>content/</code>：所有正文内容都放在这里。</li>
+<li><code>assets/</code>：共享图片、样式、脚本和图标等静态资源。</li>
+<li><code>src/templates/</code>：HTML 模板。</li>
+<li><code>src/styles/</code>：网站样式。</li>
+<li><code>scripts/build.ps1</code>：构建脚本，把 <code>content/</code> 转成 <code>dist/</code> 中的静态网页。</li>
+<li><code>dist/</code>：构建产物，GitHub Pages 最终发布这里的内容。</li>
+</ul>
+<h2>路径规则</h2>
+<p>所有 <code>content/**/index.typ</code> 都会变成一个网页：</p>
+<ul>
+<li><code>content/index.typ</code> → <code>/</code></li>
+<li><code>content/Docs/index.typ</code> → <code>/Docs/</code></li>
+<li><code>content/Docs/site-config/index.typ</code> → <code>/Docs/site-config/</code></li>
+<li><code>content/CV/index.typ</code> → <code>/CV/</code></li>
+<li><code>content/Blog/2026-05-16-building-this-blog/index.typ</code> → <code>/Blog/2026-05-16-building-this-blog/</code></li>
+</ul>
+<p>这条规则来自参考站文档中的层级结构思想：内容页面的位置决定它发布后的 URL。</p>
+<h2>元信息</h2>
+<p>每个页面开头可以写元信息：</p>
+<pre><code class="language-typst">
+// title: 页面标题
+// description: 页面摘要
+// date: 2026-05-16
+// tags: blog, learning
+</code></pre>
+<p>Blog 文章建议一定填写 <code>title</code>、<code>description</code>、<code>date</code>，因为博客列表、RSS 和搜索引擎信息都会用到它们。</p>
+<h2>新增一篇博客</h2>
+<p>新建一个文件夹，例如：</p>
+<pre><code class="language-text">
+content/Blog/2026-05-20-cs-learning-plan/index.typ
+</code></pre>
+<p>然后在里面写：</p>
+<pre><code class="language-typst">
+// title: 我的计算机学习计划
+// description: 记录第一阶段要补齐的基础知识。
+// date: 2026-05-20
+// tags: 学习计划, CS
+
+= 我的计算机学习计划
+
+正文从这里开始。
+</code></pre>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&#169; 2026 Mind-Controlll.</p>
+    <p>Powered by Typst-style writing and GitHub Pages.</p>
+  </footer>
+</body>
+</html>
+

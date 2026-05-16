@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Mind-Controlll 的学习记录</title>
+    <link>https://mind-controlll.github.io</link>
+    <description>一个从材料专业转向计算机学习的个人记录站。</description>
+    <item>
+      <title>从零开始搭建这个博客</title>
+      <link>https://mind-controlll.github.io/Blog/2026-05-16-building-this-blog/</link>
+      <guid>https://mind-controlll.github.io/Blog/2026-05-16-building-this-blog/</guid>
+      <description>记录我把个人简介、GitHub Pages 和构建脚本串起来的第一天。</description>
+      <pubDate>Sat, 16 May 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

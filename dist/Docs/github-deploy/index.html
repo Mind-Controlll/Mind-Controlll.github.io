@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Pages 部署 / Mind-Controlll</title>
+  <meta name="description" content="说明这个博客如何通过 GitHub Actions 发布到 GitHub Pages。">
+  <link rel="canonical" href="https://mind-controlll.github.io/Docs/github-deploy/">
+  <meta property="og:title" content="GitHub Pages 部署">
+  <meta property="og:description" content="说明这个博客如何通过 GitHub Actions 发布到 GitHub Pages。">
+  <meta property="og:image" content="https://mind-controlll.github.io/assets/images/johnny.PNG">
+  <link rel="alternate" type="application/rss+xml" title="Mind-Controlll" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/carbon.css?v=content-model-20260516">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <p class="site-greeting">你好 Ciallo～(∠・ω&lt; )⌒☆</p>
+      <p class="site-description">欢迎来到 Mind-Controlll 的学习记录。</p>
+      <nav class="site-links" aria-label="主导航">
+        <a href="/">Home</a>
+        <a href="/Docs/">Docs</a>
+        <a href="/Blog/">Blog</a>
+        <a href="/CV/">CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <article class="post-content">
+<h1>GitHub Pages 部署</h1>
+<p>这个博客使用 GitHub Actions 部署。你只要把代码推送到 <code>main</code> 分支，GitHub 就会自动运行 <code>.github/workflows/pages.yml</code>，构建并发布网站。</p>
+<h2>仓库设置</h2>
+<p>在 GitHub 仓库中进入：</p>
+<pre><code class="language-text">
+Settings → Pages → Build and deployment
+</code></pre>
+<p>Source 必须选择：</p>
+<pre><code class="language-text">
+GitHub Actions
+</code></pre>
+<p>不要选择 <code>Deploy from a branch</code>，否则 GitHub 可能会用默认 Jekyll 页面覆盖你的构建结果。</p>
+<h2>日常发布流程</h2>
+<pre><code class="language-powershell">
+cd &quot;G:\claude_code_demo\Mind_Controlll.github.io&quot;
+powershell -ExecutionPolicy Bypass -File &quot;.\scripts\build.ps1&quot;
+git add .
+git commit -m &quot;Update blog&quot;
+git push
+</code></pre>
+<p>推送完成后去 GitHub 的 Actions 页面，看到 <code>Deploy GitHub Pages</code> 变成绿色对勾，就说明部署成功。</p>
+<h2>常见问题</h2>
+<ul>
+<li>如果网页还是旧内容，先按 <code>Ctrl + F5</code> 强制刷新。</li>
+<li>如果 Actions 没有运行，检查工作流文件是否在 <code>.github/workflows/pages.yml</code>。</li>
+<li>如果 Pages 显示空白默认页，检查 Pages Source 是否还是 <code>GitHub Actions</code>。</li>
+</ul>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&#169; 2026 Mind-Controlll.</p>
+    <p>Powered by Typst-style writing and GitHub Pages.</p>
+  </footer>
+</body>
+</html>
+

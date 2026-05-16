@@ -1,22 +1,23 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="{{lang}}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{title}} / Mind Controlll</title>
-  <meta name="description" content="{{summary}}">
-  <link rel="stylesheet" href="/assets/carbon.css?v=tufted-structure-20260516">
+  <title>{{title}} / {{site_title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="{{canonical}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="{{image}}">
+  <link rel="alternate" type="application/rss+xml" title="{{site_title}}" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/carbon.css?v=content-model-20260516">
 </head>
 <body>
   <header class="site-header">
     <div class="site-header-inner">
-      <p class="site-greeting">你好 Ciallo～(∠・ω&lt; )⌒☆</p>
-      <p class="site-description">欢迎来到 Mind-Controlll 的学习记录。</p>
+      {{header_elements}}
       <nav class="site-links" aria-label="主导航">
-        <a href="/">Home</a>
-        <a href="/Docs/">Docs</a>
-        <a href="/Blog/">Blog</a>
-        <a href="/CV/">CV</a>
+        {{nav_links}}
       </nav>
     </div>
   </header>
@@ -26,7 +27,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Mind-Controlll · Powered by Typst-style writing and GitHub Pages.</p>
+    {{footer_elements}}
   </footer>
 </body>
 </html>

@@ -27,6 +27,7 @@
   --link-visited: var(--purple-40);
 
   --font-sans: "IBM Plex Sans", "IBM Plex Sans SC", "Segoe UI", "Noto Sans SC", Arial, sans-serif;
+  --font-serif: "IBM Plex Serif", Georgia, "Noto Serif SC", serif;
   --font-mono: "IBM Plex Mono", "Cascadia Code", Consolas, monospace;
 }
 
@@ -41,7 +42,7 @@ html {
   color-scheme: dark;
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.72;
 }
 
 body {
@@ -72,7 +73,7 @@ a:focus-visible {
 
 .site-header,
 .page-shell,
-.site-footer p {
+.site-footer {
   max-width: 70rem;
   margin: 0 auto;
 }
@@ -113,120 +114,65 @@ a:focus-visible {
   padding: 2.5rem 2rem 4rem;
 }
 
-.home-hero,
 .post-content {
-  max-width: 46rem;
+  max-width: 48rem;
 }
 
-.page-label {
-  margin: 0 0 0.75rem;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  letter-spacing: 0;
-  text-transform: uppercase;
+.recent-posts {
+  margin-top: 3rem;
 }
 
 h1,
 h2,
 h3,
-p {
+p,
+li {
   overflow-wrap: anywhere;
 }
 
 h1 {
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
   color: var(--text-primary);
-  font-size: 2.25rem;
+  font-size: 2.35rem;
   line-height: 1.18;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.home-hero p:not(.page-label) {
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-}
-
-.home-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  max-width: 60rem;
-  margin: 2.25rem 0 3rem;
-}
-
-.home-card {
-  display: grid;
-  gap: 0.3rem;
-  min-height: 9rem;
-  padding: 1rem;
-  background: var(--page);
-  border: 1px solid var(--border);
+h2 {
+  margin: 2.65rem 0 1rem;
   color: var(--text-primary);
-  text-decoration: none;
-}
-
-.home-card:hover {
-  border-color: var(--link);
-  color: var(--text-primary);
-  text-decoration: none;
-}
-
-.home-card:visited {
-  color: var(--text-primary);
-}
-
-.home-card span {
-  color: var(--link);
-  font-size: 0.85rem;
-}
-
-.home-card strong {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-.home-card small {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-
-.post-content h1 {
-  margin-bottom: 0.75rem;
-}
-
-.post-content h2 {
-  margin: 2.5rem 0 1rem;
-  color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   line-height: 1.3;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.post-content h2:first-child {
-  margin-top: 0;
-}
-
-.post-content h3 {
+h3 {
   margin: 2rem 0 0.75rem;
   font-size: 1.15rem;
 }
 
-.post-content p {
+p {
   margin: 1rem 0;
 }
 
-.post-content ul,
-.post-content ol {
+ul,
+ol {
   margin: 1rem 0;
-  padding-left: 1.5rem;
+  padding-left: 1.45rem;
 }
 
-.post-content li {
+li {
   margin: 0.55rem 0;
 }
 
-.post-content img {
+hr {
+  height: 1px;
+  margin: 2rem 0;
+  border: 0;
+  background: var(--border);
+}
+
+img {
   display: block;
   width: min(100%, 42rem);
   height: auto;
@@ -235,10 +181,27 @@ h1 {
   background: var(--layer);
 }
 
-.post-meta {
-  margin: 0 0 2rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
+code {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  background: var(--page);
+  color: var(--text-primary);
+  padding: 0.125rem 0.25rem;
+}
+
+pre {
+  overflow-x: auto;
+  margin: 1rem 0 0;
+  padding: 1rem;
+  background: var(--black);
+  color: var(--gray-10);
+  border: 1px solid var(--border);
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
 }
 
 .post-list {
@@ -275,35 +238,17 @@ h1 {
   color: var(--text-secondary);
 }
 
-code {
-  font-family: var(--font-mono);
-  font-size: 0.95em;
-  background: var(--layer);
-  color: var(--text-primary);
-  padding: 0.125rem 0.25rem;
-}
-
-pre {
-  overflow-x: auto;
-  margin: 1rem 0 0;
-  padding: 1rem;
-  background: var(--black);
-  color: var(--gray-10);
-}
-
-pre code {
-  background: transparent;
-  color: inherit;
-  padding: 0;
-}
-
 .site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
   padding: 2rem;
   border-top: 1px solid var(--border);
   color: var(--text-muted);
 }
 
 .site-footer p {
+  margin: 0;
   font-size: 0.9rem;
 }
 
@@ -317,10 +262,6 @@ pre code {
 
   h1 {
     font-size: 1.9rem;
-  }
-
-  .home-grid {
-    grid-template-columns: 1fr;
   }
 
   .post-list li {
