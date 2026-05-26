@@ -22,8 +22,8 @@
 所有 `content/**/index.typ` 都会变成一个网页：
 
 - `content/index.typ` → `/`
-- `content/Docs/index.typ` → `/Docs/`
-- `content/Docs/site-config/index.typ` → `/Docs/site-config/`
+- `content/Entry/index.typ` → `/Entry/`
+- `content/Entry/site-config/index.typ` → `/Entry/site-config/`
 - `content/CV/index.typ` → `/CV/`
 - `content/Blog/2026-05-16-building-this-blog/index.typ` → `/Blog/2026-05-16-building-this-blog/`
 
