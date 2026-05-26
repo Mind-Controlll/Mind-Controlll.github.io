@@ -1,5 +1,288 @@
-/*******************************************************************************
-CUSTOM STYLES
+@import url("https://cdn.jsdelivr.net/npm/@ibm/plex-sans@1.1.0/css/ibm-plex-sans-all.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@ibm/plex-mono@1.1.0/css/ibm-plex-mono-all.min.css");
 
-Add your custom CSS styles here to override or extend the default styles.
+/*******************************************************************************
+CARBON-SCOPED OVERRIDES
+
+Only navigation, code blocks, buttons, and dark mode are styled here.
 *******************************************************************************/
+
+:root,
+html[data-theme="light"] {
+	--carbon-blue-60: #0f62fe;
+	--carbon-blue-70: #0043ce;
+	--carbon-gray-10: #f4f4f4;
+	--carbon-gray-20: #e0e0e0;
+	--carbon-gray-30: #c6c6c6;
+	--carbon-gray-60: #6f6f6f;
+	--carbon-gray-70: #525252;
+	--carbon-gray-80: #393939;
+	--carbon-gray-90: #262626;
+	--carbon-gray-100: #161616;
+	--carbon-white: #ffffff;
+	--carbon-red-60: #da1e28;
+	--carbon-green-50: #24a148;
+	--carbon-focus: var(--carbon-blue-60);
+	--carbon-background: var(--carbon-white);
+	--carbon-layer: var(--carbon-gray-10);
+	--carbon-layer-hover: #e8e8e8;
+	--carbon-layer-active: var(--carbon-gray-30);
+	--carbon-border: var(--carbon-gray-20);
+	--carbon-border-strong: var(--carbon-gray-30);
+	--carbon-text-primary: var(--carbon-gray-100);
+	--carbon-text-secondary: var(--carbon-gray-70);
+	--carbon-text-on-color: var(--carbon-white);
+	--carbon-code-background: var(--carbon-gray-10);
+	--carbon-code-inline: var(--carbon-gray-10);
+	--carbon-code-number: var(--carbon-gray-60);
+
+	--theme-bg: var(--carbon-background);
+	--theme-text: var(--carbon-text-primary);
+	--theme-heading: var(--carbon-text-primary);
+	--theme-code-bg: var(--carbon-code-inline);
+	--theme-code-text: var(--carbon-text-primary);
+	--theme-code-border: var(--carbon-border);
+	--theme-pre-bg: var(--carbon-code-background);
+	--theme-pre-border: var(--carbon-border);
+	--theme-line-numbers-border: var(--carbon-border-strong);
+	--theme-line-numbers-text: var(--carbon-code-number);
+	--theme-copy-btn-bg: var(--carbon-blue-60);
+	--theme-copy-btn-text: var(--carbon-text-on-color);
+	--theme-copy-btn-border: var(--carbon-blue-60);
+	--theme-copy-btn-hover-bg: var(--carbon-blue-70);
+	--theme-copy-btn-hover-text: var(--carbon-text-on-color);
+	--theme-copy-btn-copied-bg: var(--carbon-green-50);
+	--theme-copy-btn-copied-text: var(--carbon-text-on-color);
+	--theme-copy-btn-copied-border: var(--carbon-green-50);
+	--theme-back-to-top: var(--carbon-text-primary);
+	--theme-back-to-top-hover: var(--carbon-text-on-color);
+}
+
+html[data-theme="dark"] {
+	--carbon-background: var(--carbon-gray-100);
+	--carbon-layer: var(--carbon-gray-90);
+	--carbon-layer-hover: #333333;
+	--carbon-layer-active: var(--carbon-gray-70);
+	--carbon-border: var(--carbon-gray-80);
+	--carbon-border-strong: var(--carbon-gray-70);
+	--carbon-text-primary: var(--carbon-gray-10);
+	--carbon-text-secondary: var(--carbon-gray-30);
+	--carbon-code-background: var(--carbon-gray-90);
+	--carbon-code-inline: var(--carbon-gray-90);
+	--carbon-code-number: var(--carbon-gray-30);
+
+	--theme-bg: var(--carbon-background);
+	--theme-text: var(--carbon-text-primary);
+	--theme-heading: var(--carbon-text-primary);
+	--theme-code-bg: var(--carbon-code-inline);
+	--theme-code-text: var(--carbon-text-primary);
+	--theme-code-border: var(--carbon-border);
+	--theme-pre-bg: var(--carbon-code-background);
+	--theme-pre-border: var(--carbon-border);
+	--theme-line-numbers-border: var(--carbon-border-strong);
+	--theme-line-numbers-text: var(--carbon-code-number);
+	--theme-copy-btn-bg: var(--carbon-blue-60);
+	--theme-copy-btn-text: var(--carbon-text-on-color);
+	--theme-copy-btn-border: var(--carbon-blue-60);
+	--theme-copy-btn-hover-bg: #4589ff;
+	--theme-copy-btn-hover-text: var(--carbon-text-on-color);
+	--theme-copy-btn-copied-bg: var(--carbon-green-50);
+	--theme-copy-btn-copied-text: var(--carbon-text-on-color);
+	--theme-copy-btn-copied-border: var(--carbon-green-50);
+	--theme-back-to-top: var(--carbon-text-primary);
+	--theme-back-to-top-hover: var(--carbon-text-on-color);
+}
+
+body {
+	font-family:
+		"IBM Plex Sans", "IBM Plex Sans SC", -apple-system, BlinkMacSystemFont,
+		"Segoe UI", sans-serif;
+}
+
+/* Navigation */
+header.site-header:has(.site-nav) {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	margin: 0;
+	background: var(--carbon-layer);
+	border-bottom: 1px solid var(--carbon-border);
+}
+
+.site-nav {
+	display: flex;
+	align-items: center;
+	gap: 0;
+	min-height: 3rem;
+	padding: 0 1rem;
+	box-sizing: border-box;
+	background: var(--carbon-layer);
+	color: var(--carbon-text-primary);
+	font-family:
+		"IBM Plex Sans", "IBM Plex Sans SC", -apple-system, BlinkMacSystemFont,
+		"Segoe UI", sans-serif;
+}
+
+header nav > p {
+	align-items: center;
+	gap: 0;
+	width: 100%;
+}
+
+.site-nav a:any-link {
+	display: inline-flex;
+	align-items: center;
+	height: 3rem;
+	margin: 0;
+	padding: 0 1rem;
+	border-radius: 0;
+	color: var(--carbon-text-secondary);
+	font-size: 0.875rem;
+	line-height: 3rem;
+	text-decoration: none;
+	transition:
+		background-color 110ms ease,
+		color 110ms ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+	background: var(--carbon-layer-hover);
+	color: var(--carbon-text-primary);
+	outline: none;
+}
+
+.site-nav a:focus-visible,
+.theme-toggle-btn:focus-visible,
+.copy-button:focus-visible,
+.back-to-top-btn:focus-visible {
+	box-shadow: inset 0 0 0 2px var(--carbon-focus);
+	outline: none;
+}
+
+/* Code blocks */
+pre {
+	background: var(--carbon-code-background) !important;
+	border: 1px solid var(--carbon-border);
+	border-radius: 0;
+	padding: 1rem 4rem 1rem 1rem;
+	color: var(--carbon-text-primary);
+	font-family:
+		"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+pre > code {
+	background: transparent !important;
+	border: 0;
+	color: var(--carbon-text-primary);
+	font-family:
+		"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+	font-size: 0.875rem;
+	line-height: 1.55;
+}
+
+code {
+	background: var(--carbon-code-inline);
+	border: 1px solid var(--carbon-border);
+	border-radius: 0;
+	color: var(--carbon-text-primary);
+	font-family:
+		"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+	font-size: 0.875em;
+}
+
+.line-numbers-rows {
+	color: var(--carbon-code-number);
+	border-right: 1px solid var(--carbon-border-strong);
+	font-family:
+		"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+	font-size: 0.875rem;
+	line-height: 1.55;
+}
+
+/* Buttons */
+.theme-toggle-btn,
+.back-to-top-btn,
+.copy-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 0;
+	font-family:
+		"IBM Plex Sans", "IBM Plex Sans SC", -apple-system, BlinkMacSystemFont,
+		"Segoe UI", sans-serif;
+	font-weight: 400;
+	transition:
+		background-color 110ms ease,
+		color 110ms ease,
+		border-color 110ms ease,
+		opacity 110ms ease;
+}
+
+.theme-toggle-btn {
+	width: 3rem;
+	height: 3rem;
+	margin: 0 0 0 auto;
+	color: var(--carbon-text-primary);
+	background: transparent;
+	border: 0;
+}
+
+.theme-toggle-btn:hover {
+	background: var(--carbon-layer-hover);
+}
+
+.theme-toggle-btn svg {
+	width: 1.25rem;
+	height: 1.25rem;
+}
+
+.copy-button {
+	top: 0;
+	right: 0;
+	min-width: 4rem;
+	height: 2rem;
+	padding: 0 1rem;
+	border: 1px solid var(--theme-copy-btn-border);
+	background: var(--theme-copy-btn-bg);
+	color: var(--theme-copy-btn-text);
+	font-size: 0.75rem;
+	opacity: 1;
+}
+
+.copy-button:hover {
+	background: var(--theme-copy-btn-hover-bg);
+	color: var(--theme-copy-btn-hover-text);
+}
+
+.copy-button.copied {
+	background: var(--theme-copy-btn-copied-bg);
+	border-color: var(--theme-copy-btn-copied-border);
+	color: var(--theme-copy-btn-copied-text);
+}
+
+.copy-button.error {
+	background: var(--carbon-red-60);
+	border-color: var(--carbon-red-60);
+	color: var(--carbon-text-on-color);
+}
+
+.back-to-top-btn {
+	width: 3rem;
+	height: 3rem;
+	background: var(--carbon-layer);
+	border: 1px solid var(--carbon-border);
+	color: var(--carbon-text-primary);
+	box-shadow: none;
+}
+
+.back-to-top-btn:hover {
+	background: var(--carbon-blue-60);
+	border-color: var(--carbon-blue-60);
+	color: var(--carbon-text-on-color);
+}
+
+.back-to-top-btn svg {
+	width: 1.25rem;
+	height: 1.25rem;
+}

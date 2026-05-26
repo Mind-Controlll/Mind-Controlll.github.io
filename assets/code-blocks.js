@@ -4,6 +4,39 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const codeBlocks = document.querySelectorAll("pre > code");
 
+	const copyText = async (text) => {
+		const clipboard = globalThis.navigator?.clipboard;
+
+		if (clipboard?.writeText) {
+			try {
+				await clipboard.writeText(text);
+				return;
+			} catch (err) {
+				console.warn("Clipboard API failed, falling back to execCommand.", err);
+			}
+		}
+
+		if (typeof document.execCommand !== "function") {
+			throw new Error("No supported clipboard copy method is available");
+		}
+
+		const textarea = document.createElement("textarea");
+		textarea.value = text;
+		textarea.setAttribute("readonly", "");
+		textarea.style.position = "fixed";
+		textarea.style.top = "0";
+		textarea.style.left = "-9999px";
+		document.body.appendChild(textarea);
+		textarea.select();
+
+		try {
+			const copied = document.execCommand("copy");
+			if (!copied) throw new Error("execCommand copy returned false");
+		} finally {
+			textarea.remove();
+		}
+	};
+
 	codeBlocks.forEach((codeBlock) => {
 		const pre = codeBlock.parentElement;
 
@@ -44,10 +77,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Create the copy button
 		const copyButton = document.createElement("button");
 		copyButton.className = "copy-button";
+		copyButton.type = "button";
+		copyButton.setAttribute("aria-label", "Copy code");
 		copyButton.textContent = "Copy";
 
 		// Add click event listener
-		copyButton.addEventListener("click", () => {
+		copyButton.addEventListener("click", async () => {
 			// Clone the code block to handle <br> tags correctly
 			const clone = codeBlock.cloneNode(true);
 
@@ -59,24 +94,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			// Get text content (now with newlines)
 			const codeText = clone.textContent;
+			const originalText = "Copy";
 
-			navigator.clipboard
-				.writeText(codeText)
-				.then(() => {
-					// Success feedback
-					const originalText = copyButton.textContent;
-					copyButton.textContent = "Copied!";
-					copyButton.classList.add("copied");
+			try {
+				await copyText(codeText);
+				// Success feedback
+				copyButton.textContent = "Copied!";
+				copyButton.classList.add("copied");
+				copyButton.classList.remove("error");
 
-					setTimeout(() => {
-						copyButton.textContent = originalText;
-						copyButton.classList.remove("copied");
-					}, 2000);
-				})
-				.catch((err) => {
-					console.error("Failed to copy text: ", err);
-					copyButton.textContent = "Error";
-				});
+				setTimeout(() => {
+					copyButton.textContent = originalText;
+					copyButton.classList.remove("copied");
+				}, 1200);
+			} catch (err) {
+				console.error("Failed to copy text: ", err);
+				copyButton.textContent = "Error";
+				copyButton.classList.add("error");
+				copyButton.classList.remove("copied");
+
+				setTimeout(() => {
+					copyButton.textContent = originalText;
+					copyButton.classList.remove("error");
+				}, 1200);
+			}
 		});
 
 		// Make sure pre is positioned relatively so we can absolute position the button
