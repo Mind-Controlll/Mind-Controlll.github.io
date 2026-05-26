@@ -1,5 +1,8 @@
-// title: Docs
-// description: Mind-Controlll 的学习文档入口。
+#import "../index.typ": template, tufted
+#show: template.with(
+  title: "Docs",
+  description: "Mind-Controlll 的学习文档入口。",
+)
 
 = 文档 / Docs
 

@@ -1,5 +1,8 @@
-// title: 关于我 / CV
-// description: 一个从材料专业毕业、从零开始学习编程与计算机基础的转码学习记录。
+#import "../index.typ": template, tufted
+#show: template.with(
+  title: "关于我 / CV",
+  description: "一个从材料专业毕业、从零开始学习编程与计算机基础的转码学习记录。",
+)
 
 = 关于我 / CV
 
@@ -30,4 +33,4 @@
 
 也许这就像我现在的处境一样。我虽然已经是一名毕业生，但综合素养甚至不如一名计算机专业的大一本科生。即使这样，我也会贯彻自己的初心，保留自己的执着。
 
-#image("/assets/images/johnny.PNG", width: 90%)
+#image("johnny.PNG", width: 90%)

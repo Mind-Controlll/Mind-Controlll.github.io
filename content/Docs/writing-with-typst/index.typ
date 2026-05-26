@@ -1,9 +1,12 @@
-// title: Typst 写作速览
-// description: 说明当前博客支持的基础 Typst-like 写法。
+#import "../../index.typ": template, tufted
+#show: template.with(
+  title: "Typst 写作速览",
+  description: "说明当前博客支持的基础 Typst 写法。",
+)
 
 = Typst 写作速览
 
-参考站用 Typst 编写内容。你现在这个博客还不是完整 Typst 编译器，而是一个入门版 Typst-like 构建脚本，先支持最常用的写法，后续可以逐步增强。
+参考站用 Typst 编写内容。现在这个博客也直接用 Typst 编译，页面元信息、脚注、边栏注释、图片、数学公式和参考文献都可以逐步接入。
 
 == 标题
 
@@ -34,10 +37,10 @@
 
 == 图片
 
-共享图片建议放在 `assets/images/`：
+页面专用图片建议放在当前文章目录中：
 
 ```typst
-#image("/assets/images/johnny.PNG", width: 90%)
+#image("johnny.PNG", width: 90%)
 ```
 
 == 代码块
@@ -50,7 +53,7 @@
 - 中间：`git status`
 - 最后一行只写三个反引号
 
-== 之后可以增强的能力
+== 可以继续使用的模板能力
 
 - 脚注和边栏注释
 - 表格

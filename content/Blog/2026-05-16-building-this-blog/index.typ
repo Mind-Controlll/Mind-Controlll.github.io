@@ -1,7 +1,9 @@
-// title: 从零开始搭建这个博客
-// description: 记录我把个人简介、GitHub Pages 和构建脚本串起来的第一天。
-// date: 2026-05-16
-// tags: 建站, GitHub Pages, Typst
+#import "../../index.typ": template, tufted
+#show: template.with(
+  title: "从零开始搭建这个博客",
+  description: "记录我把个人简介、GitHub Pages 和构建脚本串起来的第一天。",
+  date: datetime(year: 2026, month: 5, day: 16),
+)
 
 = 从零开始搭建这个博客
 

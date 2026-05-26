@@ -1,5 +1,8 @@
-// title: Home
-// description: Mind-Controlll 的个人博客首页。
+#import "../config.typ": template, tufted
+#show: template.with(
+  title: "Home",
+  description: "Mind-Controlll 的个人博客首页。",
+)
 
 = Mind-Controlll
 

@@ -1,5 +1,8 @@
-// title: 网站配置
-// description: 说明这个博客的目录结构、全局配置和页面生成规则。
+#import "../../index.typ": template, tufted
+#show: template.with(
+  title: "网站配置",
+  description: "说明这个博客的目录结构、全局配置和页面生成规则。",
+)
 
 = 网站配置
 
@@ -7,13 +10,12 @@
 
 == 项目结构
 
-- `site.config.json`：全局配置文件，管理网站标题、作者、导航、页脚和站点地址。
+- `config.typ`：全局配置文件，管理网站标题、作者、导航、页脚和站点地址。
 - `content/`：所有正文内容都放在这里。
 - `assets/`：共享图片、样式、脚本和图标等静态资源。
-- `src/templates/`：HTML 模板。
-- `src/styles/`：网站样式。
-- `scripts/build.ps1`：构建脚本，把 `content/` 转成 `dist/` 中的静态网页。
-- `dist/`：构建产物，GitHub Pages 最终发布这里的内容。
+- `tufted-lib/`：Tufted 模板函数和 Typst 辅助组件。
+- `build.py`：构建脚本，把 `content/` 编译成 `_site/` 中的静态网页。
+- `_site/`：构建产物，GitHub Pages 最终发布这里的内容。
 
 == 路径规则
 
@@ -29,16 +31,18 @@
 
 == 元信息
 
-每个页面开头可以写元信息：
+每个页面开头通过模板参数写元信息：
 
 ```typst
-// title: 页面标题
-// description: 页面摘要
-// date: 2026-05-16
-// tags: blog, learning
+#import "../../index.typ": template, tufted
+#show: template.with(
+  title: "页面标题",
+  description: "页面摘要",
+  date: datetime(year: 2026, month: 5, day: 16),
+)
 ```
 
-Blog 文章建议一定填写 `title`、`description`、`date`，因为博客列表、RSS 和搜索引擎信息都会用到它们。
+Blog 文章建议一定填写 `title`、`description`、`date`，因为 RSS 和搜索引擎信息都会用到它们。
 
 == 新增一篇博客
 
@@ -51,10 +55,12 @@ content/Blog/2026-05-20-cs-learning-plan/index.typ
 然后在里面写：
 
 ```typst
-// title: 我的计算机学习计划
-// description: 记录第一阶段要补齐的基础知识。
-// date: 2026-05-20
-// tags: 学习计划, CS
+#import "../../index.typ": template, tufted
+#show: template.with(
+  title: "我的计算机学习计划",
+  description: "记录第一阶段要补齐的基础知识。",
+  date: datetime(year: 2026, month: 5, day: 20),
+)
 
 = 我的计算机学习计划
 

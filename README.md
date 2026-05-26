@@ -1,37 +1,35 @@
 # Mind-Controlll.github.io
 
-这是 Mind-Controlll 的个人博客源码。
+这是 Mind-Controlll 的个人学习记录站，已经按 [Yousa-Mirage/Tufted-Blog-Template](https://github.com/Yousa-Mirage/Tufted-Blog-Template) 的结构重构。
 
-## 内容管理方式
+## 项目结构
 
-- 全局配置：`site.config.json`
-- 正文内容：`content/**/index.typ`
-- 共享资源：`assets/`
-- 模板：`src/templates/`
-- 样式：`src/styles/`
-- 构建脚本：`scripts/build.ps1`
-- 构建产物：`dist/`
-
-路径规则：
-
-- `content/index.typ` -> `/`
-- `content/Docs/index.typ` -> `/Docs/`
-- `content/Docs/site-config/index.typ` -> `/Docs/site-config/`
-- `content/Blog/2026-05-16-building-this-blog/index.typ` -> `/Blog/2026-05-16-building-this-blog/`
-- `content/CV/index.typ` -> `/CV/`
+- `config.typ`：全局站点配置、导航、SEO 和 RSS 设置。
+- `content/`：所有页面和文章内容。
+- `assets/`：站点样式、脚本、图标和共享静态资源。
+- `tufted-lib/`：Tufted 模板函数和 Typst 辅助组件。
+- `build.py`：构建、清理、预览和 RSS/sitemap 生成脚本。
+- `_site/`：本地构建产物，不提交到仓库。
+- `.github/workflows/deploy.yml`：GitHub Pages 自动构建和部署工作流。
 
 ## 本地构建
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File ".\scripts\build.ps1"
+python build.py build -f
+```
+
+也可以使用模板推荐的 uv：
+
+```powershell
+uv run build.py build -f
+```
+
+## 本地预览
+
+```powershell
+python build.py preview -p 8000
 ```
 
 ## 发布
 
-```powershell
-git add .
-git commit -m "Update blog"
-git push
-```
-
-GitHub Pages 使用 `.github/workflows/pages.yml` 自动构建并发布 `dist/`。
+推送到 `main` 后，GitHub Actions 会运行 `Deploy` 工作流，并发布 `_site/`。

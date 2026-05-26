@@ -1,5 +1,8 @@
-// title: 自定义样式
-// description: 说明如何管理 CSS、图片和其他静态资源。
+#import "../../index.typ": template, tufted
+#show: template.with(
+  title: "自定义样式",
+  description: "说明如何管理 CSS、图片和其他静态资源。",
+)
 
 = 自定义样式
 
@@ -7,19 +10,21 @@
 
 == 样式文件
 
-主要样式在：
+模板样式在：
 
 ```text
-src/styles/carbon.css
+assets/tufted.css
+assets/theme.css
+assets/custom.css
 ```
 
 构建时会复制到：
 
 ```text
-dist/assets/carbon.css
+_site/assets/
 ```
 
-所以你要改颜色、字体、间距、布局时，改 `src/styles/carbon.css`，不要直接改 `dist/` 里的文件。
+所以你要改颜色、字体、间距、布局时，优先改 `assets/custom.css`，不要直接改 `_site/` 里的文件。
 
 == 图片资源
 
@@ -29,15 +34,15 @@ dist/assets/carbon.css
 assets/images/
 ```
 
-文章里使用绝对路径引用：
+文章里的页面专用图片建议放在文章目录中，像 `content/CV/johnny.PNG` 这样引用：
 
 ```typst
-#image("/assets/images/johnny.PNG", width: 90%)
+#image("johnny.PNG", width: 90%)
 ```
 
 == 维护原则
 
 - 正文内容放 `content/`。
 - 共享图片放 `assets/`。
-- 样式只改 `src/styles/`。
-- `dist/` 是构建产物，可以重新生成。
+- 样式优先改 `assets/custom.css`。
+- `_site/` 是构建产物，可以重新生成。
