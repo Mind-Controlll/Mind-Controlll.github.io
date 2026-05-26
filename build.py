@@ -56,6 +56,14 @@ SITE_DIR = Path("_site")  # 输出目录
 ASSETS_DIR = Path("assets")  # 静态资源目录
 CONFIG_FILE = Path("config.typ")  # 全局配置文件
 
+LEGACY_REDIRECTS = {
+    "Docs": "Entry",
+    "Docs/site-config": "Entry/site-config",
+    "Docs/writing-with-typst": "Entry/writing-with-typst",
+    "Docs/github-deploy": "Entry/github-deploy",
+    "Docs/custom-styling": "Entry/custom-styling",
+}
+
 if hasattr(sys.stdout, "reconfigure"):
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -1123,6 +1131,40 @@ Sitemap: {site_url}/sitemap.xml
         return False
 
 
+def generate_legacy_redirects() -> bool:
+    """
+    Generate static compatibility redirects for renamed sections.
+    """
+    try:
+        for old_path, target_path in LEGACY_REDIRECTS.items():
+            target_url = f"/{target_path.strip('/')}/"
+            redirect_path = SITE_DIR / old_path / "index.html"
+            redirect_path.parent.mkdir(parents=True, exist_ok=True)
+            redirect_path.write_text(
+                f"""<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url={target_url}">
+  <link rel="canonical" href="{target_url}">
+  <title>Moved to {target_url}</title>
+  <script>window.location.replace("{target_url}");</script>
+</head>
+<body>
+  <p>Moved to <a href="{target_url}">{target_url}</a>.</p>
+</body>
+</html>
+""",
+                encoding="utf-8",
+            )
+        print(f"✅ 兼容跳转生成完成: {len(LEGACY_REDIRECTS)} 个旧路径")
+        return True
+    except Exception as e:
+        print(f"❌ 兼容跳转生成失败: {e}")
+        return False
+
+
 def build(force: bool = False) -> bool:
     """
     完整构建：HTML + PDF + 资源。
@@ -1155,6 +1197,7 @@ def build(force: bool = False) -> bool:
         results.append(generate_sitemap(site_url))
         results.append(generate_robots_txt(site_url))
         results.append(generate_rss(site_url))
+        results.append(generate_legacy_redirects())
 
     print("-" * 60)
     if all(results):
