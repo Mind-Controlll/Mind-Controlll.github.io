@@ -18,7 +18,6 @@
 
   header-elements: (
     [你好 Ciallo～(∠・ω< )⌒☆],
-    [欢迎来到 Mind-Controlll 的学习记录。],
   ),
   footer-elements: (
     "© 2026 Mind-Controlll.",
