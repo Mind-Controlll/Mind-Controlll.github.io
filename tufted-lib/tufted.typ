@@ -95,42 +95,49 @@
 
       // Body
       html.body({
-        // Custom header elements (site header, not navigation)
+        // Site header and navigation
         html.header(
-          class: "site-header",
+          class: "site-header site-masthead",
           {
-            for (i, element) in header-elements.enumerate() {
-              element
-              if i < header-elements.len() - 1 {
-                html.br()
-              }
+            if header-elements.len() > 0 {
+              html.div(
+                class: "site-header-text",
+                {
+                  for (i, element) in header-elements.enumerate() {
+                    html.span(class: "site-header-line", element)
+                    if i < header-elements.len() - 1 {
+                      " "
+                    }
+                  }
+                },
+              )
+            }
+
+            if header-elements.len() > 0 and header-links != none {
+              html.div(class: "site-header-divider", [])
+            }
+
+            if header-links != none {
+              html.nav(
+                class: "site-nav",
+                {
+                  for (href, title) in header-links {
+                    html.a(href: href, title)
+                  }
+                  html.elem(
+                    "button",
+                    attrs: (
+                      id: "theme-toggle",
+                      class: "theme-toggle-btn",
+                      type: "button",
+                      aria-label: "Toggle theme",
+                    ),
+                    "",
+                  )
+                },
+              )
             }
           },
-        )
-
-        // Add website navigation
-        html.header(
-          class: "site-header",
-          if header-links != none {
-            html.nav(
-              class: "site-nav",
-              {
-                for (href, title) in header-links {
-                  html.a(href: href, title)
-                }
-                html.elem(
-                  "button",
-                  attrs: (
-                    id: "theme-toggle",
-                    class: "theme-toggle-btn",
-                    type: "button",
-                    aria-label: "Toggle theme",
-                  ),
-                  "",
-                )
-              },
-            )
-          }
         )
 
         // Main content

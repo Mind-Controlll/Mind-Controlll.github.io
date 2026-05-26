@@ -1,5 +1,5 @@
-@import url("https://cdn.jsdelivr.net/npm/@ibm/plex-sans@1.1.0/css/ibm-plex-sans-all.min.css");
-@import url("https://cdn.jsdelivr.net/npm/@ibm/plex-mono@1.1.0/css/ibm-plex-mono-all.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/400.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/500.css");
 
 /*******************************************************************************
 CARBON-SCOPED OVERRIDES
@@ -93,53 +93,85 @@ html[data-theme="dark"] {
 	--theme-back-to-top-hover: var(--carbon-text-on-color);
 }
 
-body {
-	font-family:
-		"IBM Plex Sans", "IBM Plex Sans SC", -apple-system, BlinkMacSystemFont,
-		"Segoe UI", sans-serif;
-}
-
 /* Navigation */
-header.site-header:has(.site-nav) {
+header.site-masthead {
 	position: sticky;
 	top: 0;
 	z-index: 100;
 	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+	min-height: 3.5rem;
+	padding: 0 1rem;
+	box-sizing: border-box;
 	background: var(--carbon-layer);
 	border-bottom: 1px solid var(--carbon-border);
+}
+
+.site-header-text {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	min-width: 0;
+	max-width: min(44rem, 48vw);
+	overflow: hidden;
+	color: var(--carbon-text-primary);
+	font-size: 1.2rem;
+	line-height: 1.25;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.site-header-line {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.site-header-divider {
+	width: 1px;
+	height: 1.55rem;
+	flex: 0 0 auto;
+	background: var(--carbon-border-strong);
 }
 
 .site-nav {
 	display: flex;
 	align-items: center;
 	gap: 0;
-	min-height: 3rem;
-	padding: 0 1rem;
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 3.5rem;
+	padding: 0;
 	box-sizing: border-box;
-	background: var(--carbon-layer);
+	background: transparent;
 	color: var(--carbon-text-primary);
-	font-family:
-		"IBM Plex Sans", "IBM Plex Sans SC", -apple-system, BlinkMacSystemFont,
-		"Segoe UI", sans-serif;
 }
 
 header nav > p {
 	align-items: center;
+	flex: 0 1 auto;
 	gap: 0;
-	width: 100%;
+	min-width: 0;
+	flex-wrap: nowrap;
 }
 
 .site-nav a:any-link {
 	display: inline-flex;
 	align-items: center;
-	height: 3rem;
+	height: 3.5rem;
 	margin: 0;
-	padding: 0 1rem;
+	padding: 0 0.85rem;
 	border-radius: 0;
+	border-bottom: 0;
 	color: var(--carbon-text-secondary);
-	font-size: 0.875rem;
-	line-height: 3rem;
+	font-size: 1.45rem;
+	line-height: 3.5rem;
+	box-shadow: none;
 	text-decoration: none;
+	white-space: nowrap;
 	transition:
 		background-color 110ms ease,
 		color 110ms ease;
@@ -168,7 +200,7 @@ pre {
 	padding: 1rem 4rem 1rem 1rem;
 	color: var(--carbon-text-primary);
 	font-family:
-		"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 pre > code {
@@ -176,7 +208,7 @@ pre > code {
 	border: 0;
 	color: var(--carbon-text-primary);
 	font-family:
-		"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 	font-size: 0.875rem;
 	line-height: 1.55;
 }
@@ -187,7 +219,7 @@ code {
 	border-radius: 0;
 	color: var(--carbon-text-primary);
 	font-family:
-		"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 	font-size: 0.875em;
 }
 
@@ -195,7 +227,7 @@ code {
 	color: var(--carbon-code-number);
 	border-right: 1px solid var(--carbon-border-strong);
 	font-family:
-		"IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 	font-size: 0.875rem;
 	line-height: 1.55;
 }
@@ -208,9 +240,7 @@ code {
 	align-items: center;
 	justify-content: center;
 	border-radius: 0;
-	font-family:
-		"IBM Plex Sans", "IBM Plex Sans SC", -apple-system, BlinkMacSystemFont,
-		"Segoe UI", sans-serif;
+	font-family: inherit;
 	font-weight: 400;
 	transition:
 		background-color 110ms ease,
@@ -220,9 +250,10 @@ code {
 }
 
 .theme-toggle-btn {
-	width: 3rem;
-	height: 3rem;
+	width: 3.5rem;
+	height: 3.5rem;
 	margin: 0 0 0 auto;
+	flex: 0 0 auto;
 	color: var(--carbon-text-primary);
 	background: transparent;
 	border: 0;
@@ -285,4 +316,54 @@ code {
 .back-to-top-btn svg {
 	width: 1.25rem;
 	height: 1.25rem;
+}
+
+@media (max-width: 760px) {
+	header.site-masthead {
+		gap: 0.55rem;
+		padding: 0 0.5rem;
+		overflow-x: auto;
+	}
+
+	.site-header-text {
+		max-width: 28vw;
+		font-size: 1rem;
+	}
+
+	.site-header-divider {
+		height: 1.35rem;
+	}
+
+	.site-nav a:any-link {
+		padding: 0 0.55rem;
+		font-size: 1.15rem;
+	}
+
+	.theme-toggle-btn {
+		width: 3rem;
+		height: 3rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.site-header-text {
+		max-width: 18vw;
+		font-size: 0.95rem;
+	}
+
+	.site-nav {
+		min-height: 3rem;
+	}
+
+	.site-nav a:any-link {
+		height: 3rem;
+		padding: 0 0.3rem;
+		font-size: 0.95rem;
+		line-height: 3rem;
+	}
+
+	.theme-toggle-btn {
+		width: 2.5rem;
+		height: 3rem;
+	}
 }
