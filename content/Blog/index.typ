@@ -11,6 +11,12 @@
 == 2026
 
 #tufted.blog-entry(
+  date: datetime(year: 2026, month: 5, day: 26),
+  path: "2026-05-26-CPP-Basic/",
+  title: "C++ 基础",
+)
+
+#tufted.blog-entry(
   date: datetime(year: 2026, month: 5, day: 18),
   path: "2026-05-18-tpyst-learning/",
   title: "Typst 基础语法学习",
