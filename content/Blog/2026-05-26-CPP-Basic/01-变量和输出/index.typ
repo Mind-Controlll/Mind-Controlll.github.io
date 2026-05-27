@@ -1,4 +1,4 @@
-#import "../../index.typ": template, tufted
+#import "../../../index.typ": template, tufted
 #show: template.with(
   title: "变量和输出",
   description: "从零学习 c++ ",
