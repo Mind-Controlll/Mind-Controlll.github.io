@@ -16,6 +16,22 @@
 		);
 	}
 
+	function getArticleTitle() {
+		const title =
+			document.querySelector('meta[property="og:title"]')?.getAttribute("content")?.trim() ||
+			document.title.trim();
+
+		if (title) {
+			return title;
+		}
+
+		const segments = window.location.pathname.split("/").filter(Boolean);
+		const lastSegment = segments[segments.length - 1] || "Contents";
+		return decodeURIComponent(lastSegment)
+			.replace(/^\d{4}-\d{2}-\d{2}-/, "")
+			.replace(/[-_]+/g, " ");
+	}
+
 	function ensureHeadingId(heading, index, usedIds) {
 		const fallbackId = `toc-${index + 1}`;
 		const baseId = heading.id || fallbackId;
@@ -38,11 +54,11 @@
 	function buildToc(headings) {
 		const nav = document.createElement("nav");
 		nav.className = "toc-sidebar blog-toc";
-		nav.setAttribute("aria-label", "文章目录");
+		nav.setAttribute("aria-label", "\u6587\u7ae0\u76ee\u5f55");
 
 		const title = document.createElement("div");
 		title.className = "toc-title";
-		title.textContent = "本文目录";
+		title.textContent = getArticleTitle();
 
 		const list = document.createElement("ol");
 		const usedIds = new Set();
@@ -104,6 +120,15 @@
 
 		function updateActiveHeading() {
 			ticking = false;
+
+			const scrollBottom = window.scrollY + window.innerHeight;
+			const pageBottom = document.documentElement.scrollHeight;
+
+			if (scrollBottom >= pageBottom - 8) {
+				setActive(headings[headings.length - 1].id);
+				return;
+			}
+
 			let activeHeading = headings[0];
 
 			for (const heading of headings) {
