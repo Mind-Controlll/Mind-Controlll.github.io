@@ -1,11 +1,17 @@
 /**
- * Builds a small floating table of contents for pages with enough subsections.
+ * Builds a blog-only table of contents and highlights the current section.
  */
 (() => {
-	const MIN_H3_HEADINGS = 3;
+	const MIN_HEADINGS = 2;
+	const ACTIVE_OFFSET = 96;
+
+	function isBlogArticle() {
+		const path = window.location.pathname.replace(/\/+$/, "/");
+		return path.startsWith("/Blog/") && path !== "/Blog/";
+	}
 
 	function collectHeadings(section) {
-		return Array.from(section.querySelectorAll("h2, h3")).filter(
+		return Array.from(section.querySelectorAll("h2, h3, h4, h5")).filter(
 			(heading) => !heading.closest('[role="doc-bibliography"]'),
 		);
 	}
@@ -31,8 +37,12 @@
 
 	function buildToc(headings) {
 		const nav = document.createElement("nav");
-		nav.className = "toc-sidebar";
+		nav.className = "toc-sidebar blog-toc";
 		nav.setAttribute("aria-label", "文章目录");
+
+		const title = document.createElement("div");
+		title.className = "toc-title";
+		title.textContent = "本文目录";
 
 		const list = document.createElement("ol");
 		const usedIds = new Set();
@@ -43,9 +53,6 @@
 			const link = document.createElement("a");
 
 			item.classList.add(`toc-${heading.tagName.toLowerCase()}`);
-			if (index > 0) {
-				item.classList.add("toc-after-title");
-			}
 			link.href = `#${id}`;
 			link.textContent = heading.textContent.trim();
 
@@ -53,6 +60,7 @@
 			list.appendChild(item);
 		});
 
+		nav.appendChild(title);
 		nav.appendChild(list);
 		return nav;
 	}
@@ -82,44 +90,59 @@
 				link,
 			]),
 		);
+		let ticking = false;
 
 		function setActive(id) {
 			nav.querySelector("a.is-active")?.classList.remove("is-active");
-			linksById.get(id)?.classList.add("is-active");
+			const link = linksById.get(id);
+			if (!link) {
+				return;
+			}
+			link.classList.add("is-active");
+			link.scrollIntoView({ block: "nearest" });
 		}
 
-		setActive(headings[0].id);
+		function updateActiveHeading() {
+			ticking = false;
+			let activeHeading = headings[0];
 
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setActive(entry.target.id);
-					}
-				});
-			},
-			{
-				rootMargin: "0px 0px -70% 0px",
-				threshold: 0,
-			},
-		);
+			for (const heading of headings) {
+				const top = heading.getBoundingClientRect().top;
+				if (top <= ACTIVE_OFFSET) {
+					activeHeading = heading;
+				} else {
+					break;
+				}
+			}
 
-		headings.forEach((heading) => {
-			observer.observe(heading);
-		});
+			setActive(activeHeading.id);
+		}
+
+		function requestUpdate() {
+			if (ticking) {
+				return;
+			}
+			ticking = true;
+			window.requestAnimationFrame(updateActiveHeading);
+		}
+
+		updateActiveHeading();
+		window.addEventListener("scroll", requestUpdate, { passive: true });
+		window.addEventListener("resize", requestUpdate);
 	}
 
 	function init() {
+		if (!isBlogArticle()) {
+			return;
+		}
+
 		const section = document.querySelector("article > section");
 		if (!section) {
 			return;
 		}
 
 		const headings = collectHeadings(section);
-		const h3Count = headings.filter(
-			(heading) => heading.tagName === "H3",
-		).length;
-		if (h3Count < MIN_H3_HEADINGS) {
+		if (headings.length < MIN_HEADINGS) {
 			return;
 		}
 

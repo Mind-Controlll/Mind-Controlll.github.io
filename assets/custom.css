@@ -11,6 +11,7 @@ Only navigation, code blocks, buttons, and dark mode are styled here.
 html[data-theme="light"] {
 	--carbon-blue-60: #0f62fe;
 	--carbon-blue-70: #0043ce;
+	--carbon-blue-40: #78a9ff;
 	--carbon-gray-10: #f4f4f4;
 	--carbon-gray-20: #e0e0e0;
 	--carbon-gray-30: #c6c6c6;
@@ -22,6 +23,7 @@ html[data-theme="light"] {
 	--carbon-white: #ffffff;
 	--carbon-red-60: #da1e28;
 	--carbon-green-50: #24a148;
+	--carbon-green-40: #42be65;
 	--carbon-focus: var(--carbon-blue-60);
 	--carbon-background: var(--carbon-white);
 	--carbon-layer: var(--carbon-gray-10);
@@ -316,6 +318,199 @@ code {
 .back-to-top-btn svg {
 	width: 1.25rem;
 	height: 1.25rem;
+}
+
+/*******************************************************************************
+BLOG TABLE OF CONTENTS
+*******************************************************************************/
+
+.toc-sidebar.blog-toc {
+	position: fixed;
+	top: 6rem;
+	left: clamp(1rem, calc((100vw - 84rem) / 2), 4rem);
+	z-index: 50;
+	display: none;
+	width: 14rem;
+	max-height: calc(100vh - 8rem);
+	overflow: auto;
+	box-sizing: border-box;
+	padding: 0.85rem 0;
+	background: var(--carbon-layer);
+	border-left: 1px solid var(--carbon-border-strong);
+	color: var(--carbon-text-secondary);
+	scrollbar-width: thin;
+}
+
+.toc-sidebar.blog-toc .toc-title {
+	margin: 0 0 0.5rem;
+	padding: 0 1rem 0.55rem;
+	border-bottom: 1px solid var(--carbon-border);
+	color: var(--carbon-text-primary);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.toc-sidebar.blog-toc ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.toc-sidebar.blog-toc li {
+	margin: 0;
+}
+
+.toc-sidebar.blog-toc a:any-link {
+	display: block;
+	margin: 0;
+	padding: 0.32rem 0.9rem 0.32rem 1rem;
+	border-left: 3px solid transparent;
+	color: var(--carbon-text-secondary);
+	font-size: 0.82rem;
+	line-height: 1.28;
+	text-decoration: none;
+	transition:
+		background-color 110ms ease,
+		border-color 110ms ease,
+		color 110ms ease;
+}
+
+.toc-sidebar.blog-toc .toc-h3 a:any-link {
+	padding-left: 1.45rem;
+}
+
+.toc-sidebar.blog-toc .toc-h4 a:any-link {
+	padding-left: 1.9rem;
+	font-size: 0.78rem;
+}
+
+.toc-sidebar.blog-toc .toc-h5 a:any-link {
+	padding-left: 2.35rem;
+	font-size: 0.76rem;
+}
+
+.toc-sidebar.blog-toc a:hover,
+.toc-sidebar.blog-toc a:focus-visible {
+	background: var(--carbon-layer-hover);
+	color: var(--carbon-text-primary);
+	outline: none;
+}
+
+.toc-sidebar.blog-toc a.is-active {
+	background: var(--carbon-layer-hover);
+	border-left-color: var(--carbon-blue-60);
+	color: var(--carbon-blue-60);
+	font-weight: 600;
+}
+
+html[data-theme="dark"] .toc-sidebar.blog-toc a.is-active {
+	border-left-color: var(--carbon-blue-40);
+	color: var(--carbon-blue-40);
+}
+
+@media (min-width: 1220px) {
+	.toc-sidebar.blog-toc {
+		display: block;
+	}
+}
+
+/*******************************************************************************
+READING PROGRESS BUTTON
+*******************************************************************************/
+
+.back-to-top-btn.reading-progress-btn {
+	position: fixed;
+	right: 1.35rem;
+	bottom: 1.35rem;
+	z-index: 1000;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.25rem;
+	height: 3.25rem;
+	padding: 0;
+	background: var(--carbon-layer);
+	border: 1px solid var(--carbon-border-strong);
+	border-radius: 50%;
+	box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.16);
+	color: var(--carbon-text-primary);
+	cursor: pointer;
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+}
+
+.back-to-top-btn.reading-progress-btn:hover {
+	background: var(--carbon-layer-hover);
+	border-color: var(--carbon-blue-60);
+	color: var(--carbon-blue-60);
+}
+
+html[data-theme="dark"] .back-to-top-btn.reading-progress-btn:hover {
+	border-color: var(--carbon-blue-40);
+	color: var(--carbon-blue-40);
+}
+
+.back-to-top-btn.reading-progress-btn:focus-visible {
+	box-shadow:
+		0 0 0 2px var(--carbon-focus),
+		0 0.5rem 1.25rem rgba(0, 0, 0, 0.16);
+	outline: none;
+}
+
+.reading-progress-icon {
+	width: 3.25rem;
+	height: 3.25rem;
+	overflow: visible;
+}
+
+.reading-progress-track,
+.reading-progress-ring {
+	fill: none;
+	stroke-width: 3.5;
+}
+
+.reading-progress-track {
+	stroke: var(--carbon-border);
+}
+
+.reading-progress-ring {
+	stroke: var(--carbon-blue-60);
+	stroke-dasharray: 100;
+	stroke-dashoffset: 100;
+	stroke-linecap: round;
+	transform: rotate(-90deg);
+	transform-origin: 24px 24px;
+	transition: stroke-dashoffset 90ms linear;
+}
+
+html[data-theme="dark"] .reading-progress-ring {
+	stroke: var(--carbon-blue-40);
+}
+
+.reading-progress-arrow {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+@media (max-width: 760px) {
+	.back-to-top-btn.reading-progress-btn {
+		right: 1rem;
+		bottom: 1rem;
+		width: 3rem;
+		height: 3rem;
+	}
+
+	.reading-progress-icon {
+		width: 3rem;
+		height: 3rem;
+	}
 }
 
 @media (max-width: 760px) {
