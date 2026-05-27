@@ -234,6 +234,17 @@ code {
 	line-height: 1.55;
 }
 
+code,
+code *,
+pre,
+pre > code,
+pre > code *,
+.line-numbers-rows,
+.line-numbers-rows * {
+	font-family:
+		"JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace !important;
+}
+
 /* Buttons */
 .theme-toggle-btn,
 .back-to-top-btn,
