@@ -440,6 +440,50 @@ span[role="math"] {
 }
 
 /*******************************************************************************
+MARGIN NOTES
+*******************************************************************************/
+
+@media (min-width: 761px) {
+	section > p,
+	section > ul,
+	section > ol {
+		width: 55%;
+	}
+
+	.marginnote {
+		float: right;
+		clear: right;
+		width: 38%;
+		margin-top: 0.2rem;
+		margin-right: -43%;
+		margin-bottom: 0;
+		padding: 0;
+		position: relative;
+		color: var(--theme-text, #111);
+		font-size: 1rem;
+		font-style: normal;
+		line-height: 1.45;
+		text-align: left;
+		vertical-align: baseline;
+	}
+
+	.marginnote p,
+	.marginnote ul,
+	.marginnote ol {
+		width: 100%;
+		margin: 0 0 0.6rem;
+		font-size: inherit;
+		line-height: inherit;
+		text-align: left;
+	}
+
+	.marginnote ul,
+	.marginnote ol {
+		padding-left: 1.1rem;
+	}
+}
+
+/*******************************************************************************
 RESPONSIVE LAYOUT
 *******************************************************************************/
 
