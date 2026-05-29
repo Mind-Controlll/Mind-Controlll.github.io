@@ -178,6 +178,13 @@ h5 {
 	font-style: italic;
 }
 
+.heading-number {
+	display: inline-block;
+	margin-right: 0.35em;
+	font-style: normal;
+	font-variant-numeric: tabular-nums;
+}
+
 /*******************************************************************************
 CODE BLOCKS AND INLINE CODE
 *******************************************************************************/

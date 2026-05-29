@@ -11,9 +11,24 @@
 	}
 
 	function collectHeadings(section) {
-		return Array.from(section.querySelectorAll("h2, h3, h4, h5")).filter(
+		return Array.from(section.querySelectorAll("h2, h3, h4, h5, h6")).filter(
 			(heading) => !heading.closest('[role="doc-bibliography"]'),
 		);
+	}
+
+	function getHeadingLabel(heading) {
+		const number = heading.dataset.headingNumber;
+		const title = heading.dataset.headingTitle;
+
+		if (number && title) {
+			if (number.endsWith("\u3001")) {
+				return `${number}${title}`;
+			}
+
+			return `${number} ${title}`;
+		}
+
+		return heading.textContent.trim();
 	}
 
 	function getArticleTitle() {
@@ -70,7 +85,7 @@
 
 			item.classList.add(`toc-${heading.tagName.toLowerCase()}`);
 			link.href = `#${id}`;
-			link.textContent = heading.textContent.trim();
+			link.textContent = getHeadingLabel(heading);
 
 			item.appendChild(link);
 			list.appendChild(item);

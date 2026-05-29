@@ -403,6 +403,11 @@ BLOG TABLE OF CONTENTS
 	font-size: 0.86rem;
 }
 
+.toc-sidebar.blog-toc .toc-h6 a:any-link {
+	padding-left: 3.15rem;
+	font-size: 0.82rem;
+}
+
 .toc-sidebar.blog-toc a:hover,
 .toc-sidebar.blog-toc a:focus-visible {
 	background: var(--carbon-layer-hover);
