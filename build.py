@@ -641,6 +641,7 @@ def build_html(force: bool = False) -> bool:
 
     # 获取公共依赖
     common_deps = find_common_dependencies()
+    asset_version = str(int(time.time()))
 
     def build_html_args(typ_file: Path, output_path: Path) -> list[str]:
         """构建 HTML 编译参数"""
@@ -673,6 +674,8 @@ def build_html(force: bool = False) -> bool:
             "html",
             "--input",
             f"page-path={page_path}",
+            "--input",
+            f"asset-version={asset_version}",
             str(typ_file),
             str(output_path),
         ]

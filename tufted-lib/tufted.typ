@@ -51,6 +51,16 @@
 
   set text(lang: lang)
 
+  let asset-version = str(sys.inputs.at("asset-version", default: ""))
+  let versioned-asset(path) = {
+    if asset-version != "" and path.starts-with("/assets/") {
+      let separator = if path.contains("?") { "&" } else { "?" }
+      path + separator + "v=" + asset-version
+    } else {
+      path
+    }
+  }
+
   html.html(
     lang: lang,
     {
@@ -76,7 +86,7 @@
           "/assets/theme.css",
         )
         for (css-link) in (base-css + css).dedup() {
-          html.link(rel: "stylesheet", href: css-link)
+          html.link(rel: "stylesheet", href: versioned-asset(css-link))
         }
 
         // load JS scripts
@@ -89,7 +99,7 @@
           "/assets/back-to-top.js",
         )
         for (js-src) in (base-js + js-scripts).dedup() {
-          html.script(src: js-src)
+          html.script(src: versioned-asset(js-src))
         }
       })
 
