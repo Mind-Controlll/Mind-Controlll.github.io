@@ -435,18 +435,6 @@ def _extract_typst_datetime_arg(content: str, name: str) -> datetime | None:
         return None
 
 
-def _extract_typst_string_tuple_arg(content: str, name: str) -> list[str]:
-    match = re.search(rf"{name}\s*:\s*\((.*?)\)", content, re.DOTALL)
-    if not match:
-        return []
-
-    return [
-        _unescape_typst_string(item.group(1)).strip()
-        for item in re.finditer(r'"((?:\\.|[^"\\])*)"', match.group(1), re.DOTALL)
-        if _unescape_typst_string(item.group(1)).strip()
-    ]
-
-
 def collect_source_posts() -> list[dict]:
     """Collect Blog metadata from source Typst files for generated indexes."""
     blog_dir = CONTENT_DIR / "Blog"
@@ -473,7 +461,6 @@ def collect_source_posts() -> list[dict]:
             continue
 
         description = _extract_typst_string_arg(content, "description")
-        tags = _extract_typst_string_tuple_arg(content, "tags")
         rel_parent = typ_file.parent.relative_to(CONTENT_DIR).as_posix()
 
         posts.append(
@@ -483,7 +470,6 @@ def collect_source_posts() -> list[dict]:
                 "url": f"/{rel_parent}/",
                 "date": date_obj,
                 "section": rel_parent.split("/", 1)[0],
-                "tags": tags,
             }
         )
 
@@ -505,7 +491,6 @@ def generate_recent_posts_data() -> bool:
         for post in posts:
             date_obj = post["date"]
             date_display = f"{date_obj.year} 年 {date_obj.month} 月 {date_obj.day} 日"
-            tags = ", ".join(f'"{_escape_typst_string(tag)}"' for tag in post["tags"])
             lines.extend(
                 [
                     "  (",
@@ -513,7 +498,6 @@ def generate_recent_posts_data() -> bool:
                     f'    description: "{_escape_typst_string(post["description"])}",',
                     f'    url: "{_escape_typst_string(post["url"])}",',
                     f'    section: "{_escape_typst_string(post["section"])}",',
-                    f"    tags: ({tags}{',' if tags else ''}),",
                     f"    date: datetime(year: {date_obj.year}, month: {date_obj.month}, day: {date_obj.day}),",
                     f'    date_display: "{date_display}",',
                     "  ),",
