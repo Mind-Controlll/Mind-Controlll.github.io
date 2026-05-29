@@ -1,57 +1,51 @@
 #import "../config.typ": template, tufted
 #import "_generated/recent-posts.typ": recent-posts
+
+#let render-post-card(post) = {
+  html.a(
+    class: "post-card",
+    href: post.at("url"),
+    {
+      html.div(class: "post-title", {
+        html.span(class: "post-card-link", post.at("title"))
+      })
+
+      if post.at("description") != "" {
+        html.div(class: "post-description", {
+          post.at("description")
+        })
+      } else {
+        html.div(class: "post-description", "")
+      }
+
+      if post.at("tags", default: ()).len() != 0 {
+        html.div(class: "post-card-tags", {
+          for tag in post.at("tags") {
+            html.span(class: "post-tag", tag)
+          }
+        })
+      }
+
+      html.div(class: "post-date", {
+        post.at("date_display")
+      })
+    },
+  )
+}
+
 #show: template.with(
   title: "Home",
   description: "Mind-Controlll 的个人博客首页。",
 )
 
-= Mind-Controlll
-
-你好，我会在这里记录从材料专业转向计算机学习的过程，包括课程笔记、实验记录、项目复盘和阶段总结。
-
-== 站点入口
-
-- #link("/Entry/")[Entry]：随笔、杂项和站点维护记录。
-- #link("/Blog/")[Blog]：按年份归档学习日志、项目复盘和阶段性思考。
-- #link("/CV/")[CV]：个人简介、背景和目标。
-
-== 最新文章
-
-#if recent-posts.len() == 0 [
-  暂时还没有可展示的 Blog 文章。
-] else {
-  html.div(class: "latest-posts-grid", {
-    let count = calc.min(6, recent-posts.len())
+#if recent-posts.len() == 0 {
+  html.div(class: "post-card post-card-empty", "暂无文章")
+} else {
+  html.div(class: "posts-grid", {
+    let count = calc.min(10, recent-posts.len())
 
     for i in range(count) {
-      let post = recent-posts.at(i)
-
-      html.a(
-        class: "latest-post-card",
-        href: post.at("url"),
-        {
-          html.div(class: "latest-post-card-head", {
-            html.span(class: "latest-post-section", post.at("section"))
-            html.span(class: "latest-post-date", post.at("date_display"))
-          })
-
-          html.div(class: "latest-post-title", post.at("title"))
-
-          if post.at("description") != "" {
-            html.div(class: "latest-post-description", post.at("description"))
-          }
-        },
-      )
+      render-post-card(recent-posts.at(i))
     }
   })
-
-  html.div(class: "latest-posts-more", {
-    html.a(href: "/Blog/", "查看全部 Blog")
-  })
 }
-
-== 最近方向
-
-- 补齐计算机基础：编程、数据结构、计算机系统、网络与数据库。
-- 记录公开课 Lab：把学习过程、踩坑、解决办法写成可复用记录。
-- 保持内容优先：每篇文章先说明问题、背景、过程和结论，再补代码或图片。
