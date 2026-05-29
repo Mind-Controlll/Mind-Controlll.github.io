@@ -4,6 +4,7 @@
   title: "作用域和存储空间",
   description: "从零学习 c++ ",
   date: datetime(year: 2026, month: 5, day: 28),
+  tags: ("C++",),
 )
 
 = *作用域*(scope)和*存储空间*(storage)

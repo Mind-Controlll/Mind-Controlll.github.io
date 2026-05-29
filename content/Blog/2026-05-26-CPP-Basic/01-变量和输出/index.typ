@@ -3,6 +3,7 @@
   title: "变量和输出",
   description: "从零学习 c++ ",
   date: datetime(year: 2026, month: 5, day: 26),
+  tags: ("C++",),
 )
 
 == 变量(variable)

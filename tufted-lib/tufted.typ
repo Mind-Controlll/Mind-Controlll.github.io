@@ -21,6 +21,7 @@
   description: "",
   lang: "zh",
   date: none,
+  tags: (),
   extra-info: none,
   website-title: "",
   website-url: none,

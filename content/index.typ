@@ -42,17 +42,25 @@
 )
 
 #if recent-posts.len() == 0 {
-  html.div(class: "homepage-posts", {
-    html.div(class: "post-card post-card-empty", "暂无文章")
+  html.div(class: "homepage-carbon", {
+    html.div(class: "pages-container", {
+      html.div(class: "pages-container-inner", {
+        html.div(class: "post-card post-card-empty", "暂无文章")
+      })
+    })
   })
 } else {
-  html.div(class: "homepage-posts", {
-    html.div(class: "posts-grid", {
-      let count = calc.min(10, recent-posts.len())
+  html.div(class: "homepage-carbon", {
+    html.div(class: "pages-container", {
+      html.div(class: "pages-container-inner", {
+        html.div(class: "posts-grid", {
+          let count = calc.min(10, recent-posts.len())
 
-      for i in range(count) {
-        render-post-card(recent-posts.at(i))
-      }
+          for i in range(count) {
+            render-post-card(recent-posts.at(i))
+          }
+        })
+      })
     })
   })
 }
