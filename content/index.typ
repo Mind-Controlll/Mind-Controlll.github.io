@@ -1,4 +1,5 @@
 #import "../config.typ": template, tufted
+#import "_generated/recent-posts.typ": recent-posts
 #show: template.with(
   title: "Home",
   description: "Mind-Controlll 的个人博客首页。",
@@ -13,6 +14,41 @@
 - #link("/Entry/")[Entry]：随笔、杂项和站点维护记录。
 - #link("/Blog/")[Blog]：按年份归档学习日志、项目复盘和阶段性思考。
 - #link("/CV/")[CV]：个人简介、背景和目标。
+
+== 最新文章
+
+#if recent-posts.len() == 0 [
+  暂时还没有可展示的 Blog 文章。
+] else {
+  html.div(class: "latest-posts-grid", {
+    let count = calc.min(6, recent-posts.len())
+
+    for i in range(count) {
+      let post = recent-posts.at(i)
+
+      html.a(
+        class: "latest-post-card",
+        href: post.at("url"),
+        {
+          html.div(class: "latest-post-card-head", {
+            html.span(class: "latest-post-section", post.at("section"))
+            html.span(class: "latest-post-date", post.at("date_display"))
+          })
+
+          html.div(class: "latest-post-title", post.at("title"))
+
+          if post.at("description") != "" {
+            html.div(class: "latest-post-description", post.at("description"))
+          }
+        },
+      )
+    }
+  })
+
+  html.div(class: "latest-posts-more", {
+    html.a(href: "/Blog/", "查看全部 Blog")
+  })
+}
 
 == 最近方向
 
