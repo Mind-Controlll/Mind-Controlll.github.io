@@ -12,6 +12,12 @@
 
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 5, day: 26),
+  path: "2026-06-16-CS50/",
+  title: "Havard CS50X 公开课",
+)
+
+#tufted.blog-entry(
+  date: datetime(year: 2026, month: 5, day: 26),
   path: "2026-05-26-CPP-Basic/",
   title: "C++ 基础",
 )
