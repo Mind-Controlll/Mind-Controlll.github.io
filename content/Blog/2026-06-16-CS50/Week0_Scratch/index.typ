@@ -88,10 +88,10 @@
 
 Essentially, computer programming is about taking some input and creating some output - thus solving a problem. What happens in between the input and output, what we could call a *black box*, is the focus of this course.
 
-#figure(
-  image("blackbox.png", width: 80%, alt: "A black box with input and output"),
-  caption: [blackbox.png],
-) <black-box>
+#html.div(class: "marginnote margin-figure")[
+  #image("blackbox.png", width: 80%, alt: "A black box with input and output")
+  #par[A black box with input and output]
+] <black-box>
 
 For example, we may need to take attendance for a class. We could use a system called *unary* (also called *base-1*) to count one finger at a time.
 Computers today count using a system called *binary* (also called *base-2*). It’s from the term binary digit that we get a familiar term called bit. A bit is a zero or one: on or off.
@@ -173,10 +173,10 @@ If you wish, you can learn more about #link("https://en.wikipedia.org/wiki/ASCII
 - Zeros and ones can be used to represent color.
 - Red, green, and blue (called `RGB`) are a combination of three numbers.
 
-#tufted.margin-note[#figure(
-  image("RGB.png", width: 80%, alt: "RGB color and corespending bit number"),
-  caption: [RGB.png],
-) <RGB>]
+#html.div(class: "marginnote margin-figure")[
+  #image("RGB.png", width: 80%, alt: "RGB color and corespending bit number")
+  #par[RGB color and corespending bit number]
+] <RGB>
 
 
 - Taking our previously used 72, 73, and 33, which said `HI!` via text, would be interpreted by image readers as a `light shade of yellow`. The red value would be 72, the green value would be 73, and the blue would be 33.

@@ -13,3 +13,5 @@
 == 目录
 
 - #link("/Blog/2026-06-16-CS50/Week0_Scratch/")[Week0_Scratch]
+
+- #link("/Blog/2026-06-16-CS50/Week1_C/")[Week1_C]

@@ -651,10 +651,10 @@ BLOG TABLE OF CONTENTS
 .toc-sidebar.blog-toc {
 	position: fixed;
 	top: 6rem;
-	left: clamp(1rem, calc((100vw - 84rem) / 2), 4rem);
+	left: 1rem;
 	z-index: 50;
 	display: none;
-	width: 20rem;
+	width: min(20rem, calc(12.5vw - 2rem));
 	max-height: calc(100vh - 8rem);
 	overflow: auto;
 	box-sizing: border-box;
@@ -740,7 +740,7 @@ html[data-theme="dark"] .toc-sidebar.blog-toc a.is-active {
 	color: var(--carbon-blue-40);
 }
 
-@media (min-width: 1220px) {
+@media (min-width: 1600px) {
 	.toc-sidebar.blog-toc {
 		display: block;
 	}
@@ -889,5 +889,17 @@ html[data-theme="dark"] .reading-progress-ring {
 	.theme-toggle-btn {
 		width: 2.5rem;
 		height: 3rem;
+	}
+}
+
+@media (min-width: 761px) {
+	section > ul,
+	section > ol {
+		box-sizing: border-box;
+	}
+
+	section > .margin-figure {
+		width: 20.9%;
+		margin-right: 21.35%;
 	}
 }
